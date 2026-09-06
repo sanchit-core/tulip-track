@@ -6,6 +6,10 @@
 #   windows  → .exe (NSIS installer) (windows-latest)
 #   android  → signed aarch64 APK    (ubuntu-latest + Android NDK)
 #
+# Streaming: pushing a tag like `v0.1.0` builds everything and publishes a
+# GitHub Release with the installers + APK attached. To release:
+#     git tag v0.1.0 && git push origin v0.1.0
+#
 # Secrets (set in repo Settings → Secrets and variables → Actions):
 #   VITE_SUPABASE_URL         — Supabase project URL (adds online mode)
 #   VITE_SUPABASE_ANON_KEY    — Supabase anon (public) key
@@ -21,7 +25,12 @@ name: build
 on:
   push:
     branches: [main]
+    tags:
+      - 'v*'
   workflow_dispatch:
+
+permissions:
+  contents: write
 
 env:
   VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
@@ -125,3 +134,21 @@ jobs:
           path: |
             src-tauri/gen/android/app/build/outputs/apk/**/*release*.apk
             src-tauri/gen/android/app/build/outputs/apk/universal/**/*.apk
+
+  release:
+    # Publishes all platform artifacts as a GitHub Release. Runs only when a
+    # `v*` tag is pushed; collects every installable from the three build jobs.
+    needs: [linux, windows, android]
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+          merge-multiple: true
+      - run: ls -laR artifacts
+      - uses: softprops/action-gh-release@v2
+        with:
+          name: ${{ github.ref_name }}
+          generate_release_notes: true
+          files: artifacts/**/*
