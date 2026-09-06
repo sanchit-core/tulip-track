@@ -65,6 +65,28 @@ jobs:
           npm run build
       - name: Bundle (deb + AppImage)
         run: npm run tauri build -- --bundles deb,appimage
+      - name: Repack AppImage to use the system webkit (fix EGL display crash)
+        run: |
+          set -euxo pipefail
+          cd src-tauri/target/release/bundle/appimage
+          SOURCE=$(ls *.AppImage)
+          mv "$SOURCE" original.AppImage
+          mkdir repack && cd repack
+          ../original.AppImage --appimage-extract
+          # Drop all bundled gtk/webkit/gstreamer libs so the AppImage runs on
+          # the host's system libraries (same stack as the .deb). Bundling an
+          # older webkit2gtk causes a "Could not create default EGL display:
+          # EGL_BAD_PARAMETER. Aborting..." crash of the webkit WebProcess on
+          # newer systems, even though a window still opens.
+          rm -rf squashfs-root/usr/lib* squashfs-root/usr/lib64* 2>/dev/null || true
+          cd ..
+          curl -sL -o appimagetool \
+            https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-x86_64.AppImage
+          chmod +x appimagetool
+          ARCH=x86_64 ./appimagetool --appimage-extract-and-run repack/squashfs-root
+          mv ./*.AppImage "$SOURCE"
+          rm -f original.AppImage
+          ls -la
       - uses: actions/upload-artifact@v4
         with:
           name: tulip-track-linux
