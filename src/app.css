@@ -1,0 +1,187 @@
+:root {
+  --ink: #171717;
+  --paper: #f3efe6;
+  --surface: #ffffff;
+  --surface-2: #ede9de;
+  --surface-3: #e0dccd;
+
+  --text-1: #171717;
+  --text-2: #4a4a4a;
+  --text-3: #8a8a8a;
+  --text-on-primary: #ffffff;
+
+  --primary: #ff4d6d;
+  --primary-strong: #e6395b;
+  --primary-soft: #ffe1e7;
+
+  --accent: #ffd447;
+  --accent-soft: #fff3c4;
+
+  --present: #16a34a;
+  --present-soft: #dcf5e7;
+  --absent: #ef4444;
+  --absent-soft: #fde3e3;
+  --late: #f59e0b;
+  --late-soft: #fdeecd;
+  --excused: #7c6cf0;
+  --excused-soft: #e8e5fd;
+
+  --danger: #ef4444;
+  --danger-soft: #fde3e3;
+
+  --radius-xl: 14px;
+  --radius-lg: 12px;
+  --radius-md: 8px;
+  --radius-sm: 4px;
+
+  --border: 3px solid var(--ink);
+
+  --shadow-raised: 5px 5px 0 var(--ink);
+  --shadow-raised-lg: 8px 8px 0 var(--ink);
+  --shadow-flat: 3px 3px 0 var(--ink);
+  --shadow-pressed: 1px 1px 0 var(--ink);
+  --shadow-inset: inset 3px 3px 0 rgba(23, 23, 23, 0.08);
+  --shadow-inset-tight: inset 2px 2px 0 rgba(23, 23, 23, 0.08);
+  --shadow-pop: 10px 10px 0 var(--ink);
+
+  --t: 0.16s cubic-bezier(0.2, 0.9, 0.3, 1);
+  --font: "Nunito", "Avenir Next", -apple-system, "Segoe UI", Roboto, Ubuntu, "Noto Sans",
+    "Helvetica Neue", Arial, sans-serif;
+  --sidebar-w: 248px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  font-family: var(--font);
+  color: var(--text-1);
+  background-color: var(--paper);
+  background-image: radial-gradient(rgba(23, 23, 23, 0.06) 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 15px;
+  line-height: 1.5;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+input,
+select,
+textarea,
+button {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  color: var(--text-1);
+}
+
+.page {
+  max-width: 1060px;
+  margin: 0 auto;
+  padding: 28px 24px 96px;
+  animation: pageIn 0.35s cubic-bezier(0.2, 0.9, 0.3, 1);
+}
+
+@keyframes pageIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.page-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 22px;
+}
+
+.page-head h1 {
+  font-size: 28px;
+}
+
+.muted {
+  color: var(--text-2);
+}
+.muted-3 {
+  color: var(--text-3);
+}
+.small {
+  font-size: 13px;
+}
+.tiny {
+  font-size: 12px;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--ink);
+}
+
+input,
+select,
+textarea {
+  user-select: text;
+  -webkit-user-select: text;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--ink);
+  border-radius: 0;
+  border: 2px solid var(--paper);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-strong);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
