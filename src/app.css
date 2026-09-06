@@ -59,6 +59,14 @@ body {
   margin: 0;
   padding: 0;
   height: 100%;
+  overflow-x: hidden;
+}
+
+@supports (overflow-x: clip) {
+  html,
+  body {
+    overflow-x: clip;
+  }
 }
 
 body {

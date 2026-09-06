@@ -581,10 +581,12 @@ export async function joinGroup(code: string): Promise<Group | null> {
   const client = await supabaseClient();
   const { data, error } = await client.rpc("join_group", { p_code: clean });
   if (error) throw new Error(error.message);
-  if (!data) {
+  const raw = (data as Record<string, unknown> | null) ?? null;
+  const g = raw?.join_group ?? raw;
+  if (g === null || typeof g !== "object") {
     throw new Error("No group found with that code. Ask the creator to double-check it.");
   }
-  return data as unknown as Group;
+  return g as unknown as Group;
 }
 
 export async function leaveGroup(id: string): Promise<void> {

@@ -42,11 +42,12 @@
 
 <div class="layout" class:with-bar={showBar}>
   {#if showBar}
-    <div class="win-bar" data-tauri-drag-region="deep">
-      <span class="win-drag" data-tauri-drag-region="deep">
+    <div class="win-bar">
+      <span class="win-drag" data-tauri-drag-region>
         <Icon name="tulip" size={14} strokeWidth={2} fill />
         Tulip Track
       </span>
+      <div class="drag-fill" data-tauri-drag-region></div>
       <div class="win-btns">
         <button class="win-btn" onclick={minimizeWindow} aria-label="Minimize">
           <Icon name="minus" size={15} />
@@ -101,10 +102,11 @@
   {/if}
 
   <div class="main">
-    <header class="topbar" data-tauri-drag-region="deep">
+    <header class="topbar">
       <button class="burger" onclick={() => (drawer = true)} aria-label="Open menu">
         <Icon name="menu" size={20} />
       </button>
+      <div class="drag-fill" data-tauri-drag-region></div>
     </header>
     {@render children?.()}
   </div>
@@ -235,7 +237,7 @@
 
   .topbar {
     display: none;
-    align-items: center;
+    align-items: stretch;
     padding: 12px 18px;
   }
 
@@ -272,18 +274,22 @@
     height: 38px;
     z-index: 70;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    align-items: stretch;
     gap: 8px;
-    padding: 0 8px 0 14px;
+    padding: 0 8px 0 0;
     background: var(--surface);
     border-bottom: 3px solid var(--ink);
     user-select: none;
   }
+  .drag-fill {
+    flex: 1;
+    align-self: stretch;
+  }
   .win-drag {
-    display: inline-flex;
+    display: flex;
     align-items: center;
     gap: 7px;
+    padding-left: 14px;
     font-size: 12px;
     font-weight: 900;
     text-transform: uppercase;
@@ -334,8 +340,12 @@
       position: fixed;
       left: 0;
       top: 0;
+      height: 100dvh;
+      max-width: 86vw;
       transform: translateX(-100%);
       box-shadow: var(--shadow-pop);
+      overflow-y: auto;
+      overscroll-behavior: contain;
     }
     .sidebar.open {
       transform: none;
