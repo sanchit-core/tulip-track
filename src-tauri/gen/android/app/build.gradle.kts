@@ -1,3 +1,4 @@
+import java.util.Base64
 import java.util.Properties
 
 plugins {
@@ -13,6 +14,18 @@ val tauriProperties = Properties().apply {
     }
 }
 
+// ---------- optional release signing (env-driven: CI secrets + build script) ----------
+// When TULIP_KEYSTORE_BASE64 is set, the release build is signed. Otherwise the
+// APK/AAB is produced unsigned (fine for sideloading).
+fun env(name: String): String? = System.getenv(name)?.takeIf { it.isNotBlank() }
+
+val keystoreB64 = env("TULIP_KEYSTORE_BASE64")
+val keystoreFile = project.layout.buildDirectory.get().asFile.resolve("release-keystore.jks")
+if (keystoreB64 != null) {
+    keystoreFile.parentFile.mkdirs()
+    keystoreFile.writeBytes(Base64.getDecoder().decode(keystoreB64))
+}
+
 android {
     compileSdk = 36
     namespace = "com.sanchixt.tuliptrack"
@@ -23,6 +36,16 @@ android {
         targetSdk = 36
         versionCode = tauriProperties.getProperty("tauri.android.versionCode", "1").toInt()
         versionName = tauriProperties.getProperty("tauri.android.versionName", "1.0")
+    }
+    signingConfigs {
+        if (keystoreB64 != null) {
+            create("release") {
+                storeFile = keystoreFile
+                storePassword = env("TULIP_KEYSTORE_PASSWORD")
+                keyAlias = env("TULIP_KEY_ALIAS")
+                keyPassword = env("TULIP_KEY_PASSWORD")
+            }
+        }
     }
     buildTypes {
         getByName("debug") {
@@ -43,6 +66,9 @@ android {
                     .plus(getDefaultProguardFile("proguard-android-optimize.txt"))
                     .toList().toTypedArray()
             )
+            if (keystoreB64 != null) {
+                signingConfig = signingConfigs.getByName("release")
+            }
         }
     }
     kotlinOptions {

@@ -579,22 +579,12 @@ export async function joinGroup(code: string): Promise<Group | null> {
   }
 
   const client = await supabaseClient();
-  const user = (await client.auth.getUser()).data.user;
-  const { data: groups, error } = await client
-    .from("groups")
-    .select("*")
-    .eq("join_code", clean);
+  const { data, error } = await client.rpc("join_group", { p_code: clean });
   if (error) throw new Error(error.message);
-  if (!groups || groups.length === 0) {
+  if (!data) {
     throw new Error("No group found with that code. Ask the creator to double-check it.");
   }
-  const g = groups[0] as Group;
-  const { error: mErr } = await client.from("group_memberships").upsert(
-    { group_id: g.id, user_id: user.id },
-    { onConflict: "group_id,user_id", ignoreDuplicates: true },
-  );
-  if (mErr) throw new Error(mErr.message);
-  return g;
+  return data as unknown as Group;
 }
 
 export async function leaveGroup(id: string): Promise<void> {
