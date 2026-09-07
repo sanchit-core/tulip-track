@@ -346,6 +346,8 @@
     font-size: 14px;
     box-shadow: 3px 3px 0 var(--ink);
     transition: background var(--t), box-shadow var(--t), transform var(--t);
+    white-space: normal;
+    text-align: center;
   }
   .mark-now:hover {
     background: var(--primary-strong);
@@ -664,8 +666,31 @@
       flex-direction: column;
       align-items: flex-start;
     }
+    .mark-btns {
+      width: 100%;
+      flex-wrap: wrap;
+    }
     .stat-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .group-card {
+      padding: 16px;
+    }
+    .gc-mid {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 12px;
+    }
+    .gc-my {
+      width: 100%;
+      height: auto;
+      flex-direction: row;
+      justify-content: center;
+      gap: 10px;
+      padding: 8px 0;
+    }
+    .open {
+      display: none;
     }
   }
 </style>

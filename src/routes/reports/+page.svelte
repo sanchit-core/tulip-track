@@ -510,13 +510,22 @@
 
   @media (max-width: 760px) {
     .stats-row {
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
     .chart-grid {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
     }
     .chart-grid :global(.wide) {
       grid-column: auto;
+    }
+  }
+
+  @media (max-width: 420px) {
+    .stats-row {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .kv-v {
+      font-size: 22px;
     }
   }
 </style>

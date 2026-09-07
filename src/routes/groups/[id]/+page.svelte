@@ -397,6 +397,8 @@
     border-radius: var(--radius-md);
     padding: 6px 16px;
     box-shadow: 3px 3px 0 var(--ink);
+    overflow-wrap: anywhere;
+    min-width: 0;
   }
   .code-hint {
     width: 100%;
@@ -596,6 +598,35 @@
     .cmp-pct {
       width: auto;
       font-size: 14px;
+    }
+    .code {
+      font-size: 18px;
+      letter-spacing: 0.12em;
+      padding: 5px 12px;
+    }
+    .hol-range-inputs {
+      flex-direction: column;
+    }
+    .hol-name {
+      min-width: 0;
+      overflow-wrap: anywhere;
+    }
+    .head-acts {
+      width: 100%;
+      flex-wrap: wrap;
+    }
+  }
+
+  @media (max-width: 420px) {
+    .cmp-row {
+      flex-wrap: wrap;
+    }
+    .cmp-bar {
+      width: 100%;
+      order: 3;
+    }
+    .cmp-name {
+      min-width: 0;
     }
   }
 </style>

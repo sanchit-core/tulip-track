@@ -51,6 +51,10 @@
     font-weight: 800;
     white-space: nowrap;
     box-shadow: 2px 2px 0 var(--ink);
+    min-width: 0;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .badge.present { color: var(--present); }

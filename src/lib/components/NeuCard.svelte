@@ -38,6 +38,8 @@
     transition: box-shadow var(--t), transform var(--t);
     position: relative;
     padding: 22px;
+    min-width: 0;
+    width: 100%;
   }
 
   .no-pad {

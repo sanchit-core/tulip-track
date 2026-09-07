@@ -79,6 +79,7 @@
     display: flex;
     flex-direction: column;
     gap: 1px;
+    min-width: 0;
   }
 
   .main {
