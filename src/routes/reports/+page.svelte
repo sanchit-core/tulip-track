@@ -367,8 +367,8 @@
 
   .stats-row {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-    gap: 18px;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
     margin-bottom: 20px;
   }
   .center-cell {
@@ -509,9 +509,6 @@
   }
 
   @media (max-width: 760px) {
-    .stats-row {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
     .chart-grid {
       grid-template-columns: minmax(0, 1fr);
     }
@@ -521,9 +518,6 @@
   }
 
   @media (max-width: 420px) {
-    .stats-row {
-      grid-template-columns: minmax(0, 1fr);
-    }
     .kv-v {
       font-size: 22px;
     }

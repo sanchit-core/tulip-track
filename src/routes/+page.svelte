@@ -303,7 +303,7 @@
                   <div class="gc-mid">
                     <div class="gc-my">
                       <b>{myPct(s)}%</b>
-                      <span class="muted-3 small">{myTotal(s)} records</span>
+                      <span class="muted-3 small">· {myTotal(s)} records</span>
                     </div>
                     <div class="gc-right">
                       <div class="pills">
@@ -517,8 +517,8 @@
 
   .group-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr));
-    gap: 18px;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
   }
 
   .group-card {
@@ -580,32 +580,23 @@
 
   .gc-mid {
     display: flex;
-    align-items: center;
-    gap: 16px;
+    flex-direction: column;
+    gap: 12px;
   }
   .gc-my {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 2px;
-    width: 86px;
-    height: 86px;
-    border: 3px solid var(--ink);
-    border-radius: var(--radius-md);
-    background: var(--accent-soft);
-    box-shadow: 3px 3px 0 var(--ink);
-    flex-shrink: 0;
+    align-items: baseline;
+    gap: 10px;
   }
   .gc-my b {
-    font-size: 24px;
+    font-size: 26px;
     font-weight: 900;
+    line-height: 1.2;
   }
   .gc-right {
     display: flex;
     flex-direction: column;
     gap: 8px;
-    flex: 1;
   }
   .pills {
     display: flex;
@@ -675,19 +666,6 @@
     }
     .group-card {
       padding: 16px;
-    }
-    .gc-mid {
-      flex-direction: column;
-      align-items: stretch;
-      gap: 12px;
-    }
-    .gc-my {
-      width: 100%;
-      height: auto;
-      flex-direction: row;
-      justify-content: center;
-      gap: 10px;
-      padding: 8px 0;
     }
     .open {
       display: none;
