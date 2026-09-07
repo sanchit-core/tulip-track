@@ -1,6 +1,5 @@
 <script lang="ts">
   import Icon from "./Icon.svelte";
-  import { createEventDispatcher } from "svelte";
 
   let {
     open = false,
@@ -8,6 +7,7 @@
     width = 440,
     padded = true,
     dismissable = true,
+    onclose,
     children,
     ...rest
   }: {
@@ -16,15 +16,14 @@
     width?: number;
     padded?: boolean;
     dismissable?: boolean;
+    onclose?: () => void;
     children?: import("svelte").Snippet;
     [key: string]: any;
   } = $props();
 
-  const dispatch = createEventDispatcher();
-
   function onClose() {
     if (!dismissable) return;
-    dispatch("close");
+    onclose?.();
   }
 
   function onOverlay(e: MouseEvent) {

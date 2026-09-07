@@ -216,7 +216,6 @@
       icon="key"
       maxlength="6"
       style="text-transform: uppercase; letter-spacing: 0.2em; font-weight: 900;"
-      oninput={joinCode = joinCode.toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 6)}
     />
     <div class="form-acts">
       <NeuButton variant="inset" full onclick={() => (joinOpen = false)}>Cancel</NeuButton>
