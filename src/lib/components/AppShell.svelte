@@ -145,22 +145,14 @@
   .logo {
     width: 44px;
     height: 44px;
-    border-radius: var(--radius-md);
-    border: 3px solid var(--ink);
-    background: var(--accent);
-    color: var(--ink);
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 3px 3px 0 var(--ink);
-    transform: rotate(-4deg);
   }
 
   .logo-img {
     width: 100%;
     height: 100%;
-    border-radius: calc(var(--radius-md) - 3px);
-    object-fit: cover;
     display: block;
   }
 
@@ -307,7 +299,6 @@
   .win-logo {
     width: 16px;
     height: 16px;
-    border-radius: 4px;
     object-fit: cover;
     display: block;
   }

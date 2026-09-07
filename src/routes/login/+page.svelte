@@ -139,30 +139,21 @@
   .logo {
     width: 68px;
     height: 68px;
-    border-radius: var(--radius-lg);
-    border: 3px solid var(--ink);
-    background: var(--accent);
-    color: var(--ink);
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 5px 5px 0 var(--ink);
-    transform: rotate(-4deg);
     margin-bottom: 4px;
   }
 
   .logo-img {
     width: 100%;
     height: 100%;
-    border-radius: calc(var(--radius-lg) - 3px);
-    object-fit: cover;
     display: block;
   }
 
   .demo-logo {
     width: 15px;
     height: 15px;
-    border-radius: 3px;
     object-fit: cover;
     display: inline-block;
     vertical-align: -3px;
