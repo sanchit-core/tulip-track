@@ -78,14 +78,18 @@ jobs:
           # older webkit2gtk causes a "Could not create default EGL display:
           # EGL_BAD_PARAMETER. Aborting..." crash of the webkit WebProcess on
           # newer systems, even though a window still opens.
-          rm -rf squashfs-root/usr/lib* squashfs-root/usr/lib64* 2>/dev/null || true
+          rm -rf squashfs-root/usr/lib* squashfs-root/usr/lib64*
           cd ..
           curl -sL -o appimagetool \
             https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-x86_64.AppImage
           chmod +x appimagetool
-          ARCH=x86_64 ./appimagetool --appimage-extract-and-run repack/squashfs-root
-          mv ./*.AppImage "$SOURCE"
-          rm -f original.AppImage
+          mkdir -p out && cd out
+          ARCH=x86_64 ../appimagetool --appimage-extract-and-run ../repack/squashfs-root
+          cd ..
+          REBUILT=$(ls out/*.AppImage)
+          mv "$REBUILT" rebuilt.AppImage
+          rm -rf original.AppImage repack appimagetool out
+          mv rebuilt.AppImage "$SOURCE"
           ls -la
       - uses: actions/upload-artifact@v4
         with:
