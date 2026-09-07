@@ -44,7 +44,7 @@
   {#if showBar}
     <div class="win-bar">
       <span class="win-drag" data-tauri-drag-region>
-        <Icon name="tulip" size={14} strokeWidth={2} fill />
+        <img class="win-logo" src="/tulip-track-icon.png" alt="" />
         Tulip Track
       </span>
       <div class="drag-fill" data-tauri-drag-region></div>
@@ -61,7 +61,7 @@
 
   <aside class="sidebar" class:open={drawer}>
     <div class="brand" data-tauri-drag-region="deep">
-      <span class="logo"><Icon name="tulip" size={24} strokeWidth={2} fill /></span>
+      <span class="logo"><img class="logo-img" src="/tulip-track-icon.png" alt="" /></span>
       <span class="name">Tulip Track</span>
     </div>
 
@@ -154,6 +154,14 @@
     justify-content: center;
     box-shadow: 3px 3px 0 var(--ink);
     transform: rotate(-4deg);
+  }
+
+  .logo-img {
+    width: 100%;
+    height: 100%;
+    border-radius: calc(var(--radius-md) - 3px);
+    object-fit: cover;
+    display: block;
   }
 
   .name {
@@ -295,6 +303,13 @@
     text-transform: uppercase;
     letter-spacing: 0.08em;
     color: var(--text-2);
+  }
+  .win-logo {
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    object-fit: cover;
+    display: block;
   }
   .win-btns {
     display: flex;

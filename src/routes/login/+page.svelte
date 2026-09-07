@@ -2,7 +2,6 @@
   import NeuButton from "../../lib/components/NeuButton.svelte";
   import NeuInput from "../../lib/components/NeuInput.svelte";
   import NeuCard from "../../lib/components/NeuCard.svelte";
-  import Icon from "../../lib/components/Icon.svelte";
   import { login, user } from "../../lib/session";
   import { signUp } from "../../lib/db";
   import { toast } from "../../lib/toasts";
@@ -62,7 +61,7 @@
 <div class="login-page">
   <div class="card-wrap">
     <div class="brand">
-      <span class="logo"><Icon name="tulip" size={30} strokeWidth={2} fill /></span>
+      <span class="logo"><img class="logo-img" src="/tulip-track-icon.png" alt="" /></span>
       <h1>Tulip Track</h1>
       <p>Shared groups. Join codes. Everyone tracks themselves.</p>
     </div>
@@ -90,7 +89,7 @@
 
         {#if backendMode === "demo"}
           <button type="button" class="demo" onclick={useDemo}>
-            <Icon name="tulip" size={15} strokeWidth={2} />
+            <img class="demo-logo" src="/tulip-track-icon.png" alt="" />
             Explore the demo (no account needed)
           </button>
           {#if SHOW_DEMO_ACCOUNTS}
@@ -150,6 +149,23 @@
     box-shadow: 5px 5px 0 var(--ink);
     transform: rotate(-4deg);
     margin-bottom: 4px;
+  }
+
+  .logo-img {
+    width: 100%;
+    height: 100%;
+    border-radius: calc(var(--radius-lg) - 3px);
+    object-fit: cover;
+    display: block;
+  }
+
+  .demo-logo {
+    width: 15px;
+    height: 15px;
+    border-radius: 3px;
+    object-fit: cover;
+    display: inline-block;
+    vertical-align: -3px;
   }
 
   h1 {
