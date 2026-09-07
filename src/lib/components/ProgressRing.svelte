@@ -14,16 +14,15 @@
   );
 </script>
 
-<div class="ring" style={`width:${size}px;height:${size}px`}>
+<div class="ring" style={`--size:${size}px; width:${size}px; height:${size}px`}>
   <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
     <circle
       cx={size / 2}
       cy={size / 2}
       r={r}
       fill="none"
-      stroke="var(--ink)"
+      stroke="var(--surface-3)"
       stroke-width={stroke}
-      stroke-dasharray="4 4"
     />
     <circle
       cx={size / 2}
@@ -36,7 +35,7 @@
       stroke-dasharray={`${c}`}
       stroke-dashoffset={`${c - (pct / 100) * c}`}
       transform={`rotate(-90 ${size / 2} ${size / 2})`}
-      style="transition: stroke-dashoffset .6s cubic-bezier(.3,.7,.3,1), stroke .3s"
+      style="transition: stroke-dashoffset .6s cubic-bezier(.3,.7,.3,1), stroke .3s; filter: drop-shadow(0 2px 3px rgba(23,23,23,.18));"
     />
   </svg>
   <div class="center">
