@@ -563,6 +563,7 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    min-width: 0;
   }
   .needs-tag {
     font-size: 10.5px;
@@ -657,6 +658,9 @@
       flex-direction: column;
       align-items: flex-start;
     }
+    .hero-right {
+      margin-bottom: 8px;
+    }
     .mark-btns {
       width: 100%;
       flex-wrap: wrap;
@@ -666,6 +670,11 @@
     }
     .group-card {
       padding: 16px;
+    }
+    .gc-title b {
+      white-space: normal;
+      overflow: visible;
+      text-overflow: clip;
     }
     .open {
       display: none;

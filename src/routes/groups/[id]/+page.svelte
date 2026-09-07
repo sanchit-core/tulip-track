@@ -243,10 +243,10 @@
               <div class="cmp-row">
                 <Avatar name={m.name} size={38} />
                 <div class="cmp-name">
-                  <b>
-                    {m.name}
+                  <div class="cmp-line">
+                    <b>{m.name}</b>
                     {#if m.id === me}<span class="you">you</span>{/if}
-                  </b>
+                  </div>
                   <span class="muted-3 small">{m.email || "—"}</span>
                 </div>
                 <div class="cmp-nums">
@@ -441,11 +441,18 @@
     min-width: 0;
     flex: 1;
   }
-  .cmp-name b {
+  .cmp-line {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+  }
+  .cmp-line b {
     font-size: 15px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    min-width: 0;
   }
   .you {
     font-size: 11px;
@@ -457,8 +464,8 @@
     border: 2px solid var(--ink);
     border-radius: var(--radius-sm);
     padding: 1px 7px;
-    margin-left: 8px;
     vertical-align: 1px;
+    flex-shrink: 0;
   }
   .cmp-nums {
     display: flex;
@@ -598,6 +605,11 @@
     .cmp-pct {
       width: auto;
       font-size: 14px;
+    }
+    .cmp-line b {
+      white-space: normal;
+      overflow: visible;
+      text-overflow: clip;
     }
     .code {
       font-size: 18px;
