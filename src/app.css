@@ -114,6 +114,8 @@ h4 {
 }
 
 .page {
+  width: 100%;
+  min-width: 0;
   max-width: 1060px;
   margin: 0 auto;
   padding: 28px 24px 96px;
